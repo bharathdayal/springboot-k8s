@@ -88,7 +88,7 @@ kubectl get pods
  ![image](https://github.com/user-attachments/assets/c08f01cb-d45e-4d10-900e-b7e385659618)
 
 You should see the pods running for your application.
-#### 5.3. Access the Application
+#### 5.3. Verify the service
 If you’ve used the LoadBalancer type for the service, Kubernetes will provision an external IP for you. You can check the external IP by running:
  	`kubectl get services`
 
@@ -107,7 +107,7 @@ If you want to tail the logs of a specific pod:
 ```yaml
 kubectl logs -f <pod-name>
 ```
-### 8. Check the application 
+### 8. Access the application 
 #### 8.1 Minikube Dashboard	8.1 Minikube Dashboard
 	minikube dashboard
 	 
