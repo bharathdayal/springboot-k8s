@@ -144,9 +144,8 @@ minikube service springboot-k8s-svc --url
 ### 9. Enable Health Checks (Optional)
 It's a good practice to add health checks (liveness and readiness probes) to your Kubernetes configuration to ensure that your app is running smoothly.
 You can add the following to your deployment.yaml file:
-
-yaml
-      containers:
+```yaml
+containers:
         - name: spring-boot-k8s-demo
           image: <your-docker-username>/spring-boot-k8s-demo:v1
           ports:
@@ -163,6 +162,8 @@ yaml
               port: 8080
             initialDelaySeconds: 5
             periodSeconds: 10
+```
+
 Ensure that the Spring Boot actuator dependency is added to your project for health checks:
 xml
 Copy
