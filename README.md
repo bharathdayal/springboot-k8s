@@ -108,7 +108,7 @@ If you want to tail the logs of a specific pod:
 kubectl logs -f <pod-name>
 ```
 ### 8. Access the application 
-#### 8.1 Minikube Dashboard	8.1 Minikube Dashboard
+#### 8.1 Minikube Dashboard	
 	minikube dashboard
 	 
  ![image](https://github.com/user-attachments/assets/bdb0da34-7d41-4293-b055-f4b6481cd114)
@@ -144,8 +144,8 @@ minikube service springboot-k8s-svc --url
 ### 9. Enable Health Checks (Optional)
 It's a good practice to add health checks (liveness and readiness probes) to your Kubernetes configuration to ensure that your app is running smoothly.
 You can add the following to your deployment.yaml file:
+
 yaml
-Copy
       containers:
         - name: spring-boot-k8s-demo
           image: <your-docker-username>/spring-boot-k8s-demo:v1
