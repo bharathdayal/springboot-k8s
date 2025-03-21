@@ -2,6 +2,9 @@
 
 ## 1. Build the Spring Boot Application
 First, ensure you have a Spring Boot application ready. If you don't have one, you can create a simple Spring Boot application using Spring Initializr.
+![image](https://github.com/user-attachments/assets/fba9921d-56f9-4d63-bedf-33cd21853b8a)
+
+![image](https://github.com/user-attachments/assets/907b177f-efdf-4a19-9b27-43767d7b67ed)
 
 
 
