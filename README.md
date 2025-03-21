@@ -2,6 +2,7 @@
 
 ## 1. Build the Spring Boot Application
 First, ensure you have a Spring Boot application ready. If you don't have one, you can create a simple Spring Boot application using Spring Initializr.
+
 ![image](https://github.com/user-attachments/assets/fba9921d-56f9-4d63-bedf-33cd21853b8a)
 
 ![image](https://github.com/user-attachments/assets/907b177f-efdf-4a19-9b27-43767d7b67ed)
@@ -40,7 +41,9 @@ docker push  bharathdayal/demok8s
 ```
 
 
+ ![image](https://github.com/user-attachments/assets/81e35ca8-811c-4f42-ac25-deb281c5cf28)
  
+
 
 
 ### 4. Create Kubernetes Configuration Files
@@ -63,11 +66,19 @@ check mysql connection
 ```yaml
 kubectl exec -it mysql-556f8d75b7-ljwwz -- /bin/bash
 ```
- 
+
+![image](https://github.com/user-attachments/assets/f8acfb26-cd3e-46d1-b149-c5039f58d46c)
+
+
 
 ```yaml
 kubectl apply -f k8s-app.yaml
 ```
+
+![image](https://github.com/user-attachments/assets/44268845-a813-47f3-bbaa-fe1c44fc9eb4)
+
+
+
  
 #### 5.2. Verify the Deployment
 Check the status of your pods:
@@ -79,6 +90,11 @@ You should see the pods running for your application.
 #### 5.3. Access the Application
 If you’ve used the LoadBalancer type for the service, Kubernetes will provision an external IP for you. You can check the external IP by running:
  	`kubectl get services`
+
+  ![image](https://github.com/user-attachments/assets/8112290b-c356-44c9-8d16-811152c85b92)
+
+  
+
  
 ### 6. Scaling and Managing the Application
 You can scale your application by modifying the replicas in the deployment YAML or by using the following command:
@@ -93,17 +109,36 @@ If you want to tail the logs of a specific pod:
 kubectl logs -f <pod-name>
 ```
 ### 8. Check the application 
-#### 8.1 Minikube Dashboard	8.1 Minikube Dashboard
+#### 8.1 Minikube Dashboard
 	minikube dashboard
-	 
  
+ ![image](https://github.com/user-attachments/assets/e7ef797f-61f8-40c5-8cdb-8987f0ea52ea)
  
+ ![image](https://github.com/user-attachments/assets/0337e370-0c26-4a62-b7c0-dcfa431ef801)
+
+ ![image](https://github.com/user-attachments/assets/0059e4f7-8ee8-46c0-bffd-13caaa5c20c3) 
+
+ ![image](https://github.com/user-attachments/assets/c90c45c0-8030-449d-a888-7f12d3041357)
+
+ ![image](https://github.com/user-attachments/assets/90e30a26-6733-4a16-9a77-bd62f9ab3bff)
+
  
- 
+
 #### 8.2  Service Test – Get the service URL 
 ```yaml
 minikube service springboot-k8s-svc --url
 ```
+
+![image](https://github.com/user-attachments/assets/9f3661a6-42ff-4fbc-96ba-e792c57110bf)
+
+![image](https://github.com/user-attachments/assets/9ed25b76-f623-4977-a9cf-464aa809e1dc)
+
+![image](https://github.com/user-attachments/assets/8c5afa17-2a08-4304-a11b-c71d1de393bd)
+
+
+
+
+
  
  
  
