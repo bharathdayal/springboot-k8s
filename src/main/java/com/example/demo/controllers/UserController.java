@@ -40,6 +40,36 @@ public class UserController {
         List<User> users = userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
+    //Build Get Only specific User filtering using email
+    @GetMapping(path="/email")
+    public ResponseEntity<User> getUserEmail(@RequestParam String userEmail)  {
+        User user=userService.findByUserEmail(userEmail);
+        System.out.println(user.getEmail());
+        return new ResponseEntity<>(user,HttpStatus.OK);
+    }
+
+    //Build Get Only specific User filtering using username
+    @GetMapping(path="name")
+    public ResponseEntity<User> getUserName(@RequestParam String userName) {
+        User user = userService.findByUsername(userName);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    //Build Get Only specific User filtering using username or email
+    @GetMapping(path="search")
+    public ResponseEntity<User> getUsernameOrEmail(@RequestParam String username, String email) {
+        User user =userService.findByUsernameOrEmail(username,email);
+        return new ResponseEntity<>(user,HttpStatus.OK);
+    }
+
+    // //Build Get Only specific User filtering using username by Hibernate Named Query
+
+    @GetMapping(path="userall")
+    public ResponseEntity<String> getUsernameByAll(@RequestParam String userName) {
+        String user = userService.findByUsernameAll(userName);
+        System.out.println("USER QUERY===>" + user);
+        return new ResponseEntity<>(user,HttpStatus.OK);
+    }
 
     // Build Update User REST API
     @PutMapping("{id}")

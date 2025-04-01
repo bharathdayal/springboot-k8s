@@ -2,22 +2,33 @@ package com.example.demo;
 
 import com.example.demo.interfaces.*;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.cache.annotation.EnableCaching;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
+@SpringBootApplication(exclude ={ SecurityAutoConfiguration.class,  ManagementWebSecurityAutoConfiguration.class })
 @EnableCaching
 public class DemoApplication {
 
     //@SpringBootApplication(exclude= {SecurityAutoConfiguration.class,DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException, InterruptedException {
 		System.out.println("DEMO APP STARTED");
 
 		MapInterface mapInterface = new MapInterface();
@@ -75,6 +86,168 @@ public class DemoApplication {
 
 		Predicate<String> stringPredicate =input->input.contains("Predicate");
 		System.out.println("Functional Interface Predicate===>" +stringPredicate.test("Functional Interface Predicate"));
+
+	    // Stream Demo
+
+		StreamDemo streamDemo = new StreamDemo();
+		streamDemo.streamArray();
+		streamDemo.StreamFromCollections();
+
+		// Reverse String
+		String str = "Reverse the String";
+
+		StringBuilder stringBuilder = new StringBuilder(str);
+		System.out.println(stringBuilder.reverse());
+
+		// Using for loop to reverse string
+		String reversed="";
+
+		for(int i=str.length()-1;i >=0;i--) {
+			reversed+= str.charAt(i);
+		}
+		System.out.println(reversed);
+
+		// Count the alphabets in string
+
+		int alphacount = 0;
+
+		for(int i =0; i < str.length();i++) {
+			char ch = str.charAt(i);
+
+
+		if(Character.isAlphabetic(ch)) {
+			alphacount++;
+		   }
+		}
+        System.out.println(alphacount);
+
+		List<String> arraylist = new ArrayList<>();
+		arraylist.add("Test 1");
+		arraylist.add("Test 2");
+
+		Stream<String> stream =arraylist.stream();
+
+        List<String> streamlist1 = stream.map(String::toUpperCase).collect(Collectors.toUnmodifiableList());
+		System.out.println(streamlist1);
+
+
+
+		List<String> streamlist2=arraylist.stream().filter(name->name.contains("Test 1")).collect(Collectors.toUnmodifiableList());
+		System.out.println(streamlist2);
+
+		Person person = new Person();
+		person.setPersonname("PersonName");
+		person.setPersonage(40);
+
+		System.out.println("Name: " + person.getPersonname());
+		System.out.println("Age: " + person.getPersonage());
+
+		// Trying to set an invalid age
+		person.setPersonage(-5);
+
+		String dateString = "2025-03-15 17:30:00";
+		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+		Date empDate = dateformat.parse(dateString);
+		Employee employee = new Employee("John",45,"ISIT",empDate);
+		System.out.println("Employee Details: " + employee);
+
+		empDate.setTime(0);
+		System.out.println("Employee Details: " + employee);
+
+        List<Integer> number = Arrays.asList(1,2,3,4,5,6,7,8,9,10,11);
+		List<Integer> even = number.stream().filter(n->n%2==0).collect(Collectors.toList());
+		System.out.println(even);
+
+		List<String> mapArray = Arrays.asList("Hello World", "How are you", "Java is awesome");
+		List<String> mapStream = mapArray.stream().map(String::toUpperCase).toList();
+		System.out.println(mapStream);
+
+		List<String> flatArray = new ArrayList<>();
+		flatArray.add("Hello World");
+		flatArray.add("How are you");
+		flatArray.add("Java is awesome");
+
+		List<String> flatStream = flatArray.stream().flatMap(s-> Arrays.stream(s.split(" "))).toList();
+		System.out.println(flatStream);
+
+		List<List<Integer>> listofInteger = Arrays.asList(
+				Arrays.asList(1,2,3),
+				Arrays.asList(4,5,6),
+				Arrays.asList(7,8,9)
+
+		);
+		List<Integer> flatListofList = listofInteger.stream()
+													.flatMap(List::stream)
+				.toList();
+
+        System.out.println(flatListofList);
+
+		List<String> streamArray = Arrays.asList("A","B","C","D","E");
+
+		//Consumer
+		Consumer<String> consumeStream = arr->System.out.println(arr);
+		consumeStream.accept("F");
+		streamArray.stream().forEach(consumeStream);
+
+		//Supplier
+		Supplier<String> supplerStream = ()->"test";
+		System.out.println(supplerStream.get());
+		//streamArray.stream().collect(Collectors.toList());
+
+		LocalDate date = LocalDate.now();
+		System.out.println(date);
+
+		List<String> stringSearch = Arrays.asList("John", "Jane", "Alex");
+		//Optional<String> search = stringSearch.stream().filter(input->input.startsWith("Z")).collect(Collectors.toList());
+
+		//String finalString = search.orElseGet(()->"Default String");
+
+		List<Integer> arrInteger = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		arrInteger.stream().map(n->n*2).forEach(System.out::println);
+		arrInteger.parallelStream().map(a->a*2).forEach(System.out::println);
+
+		//Thread
+
+		MyThread thread1=new MyThread();
+		MyThread thread2=new MyThread();
+
+		//thread1.start();
+		//thread2.interrupt();
+		//thread2.start();
+
+		//Thread runnable1=new Thread(new MyRunnable());
+		//Thread runnable2=new Thread(new MyRunnable());
+
+		//runnable1.start();
+		//runnable2.start();
+
+		ExecutorService executorService = Executors.newFixedThreadPool(2);
+		var scheduleThreadPool  = Executors.newScheduledThreadPool(5);
+
+        for(int i=0;i<=5;i++) {
+			MyRunnable runnable = new MyRunnable();
+			String message = "Scheduled task started with " + i + " seconds delay";
+			//scheduleThreadPool.schedule(()->System.out.println(message),i, TimeUnit.SECONDS);
+			//executorService.execute(runnable);
+		}
+		executorService.shutdown();
+
+
+		//Concurrent Hash Map
+
+		ConcurrentHashMap<Integer,String> concurrent = new ConcurrentHashMap<Integer,String>();
+        concurrent.put(1,"one");
+		concurrent.put(2,"two");
+
+		new Thread(()-> { System.out.println("Thread 1:Read key 1"+concurrent.get(1));}).start();
+
+		new Thread(()->{ concurrent.put(3,"three");   System.out.println("Thread 2:Inserted key 3");}).start();
+
+
+
+
+
 
 	}
 

@@ -5,6 +5,7 @@ import com.example.demo.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +16,6 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
-
 
 
     @Override
@@ -54,4 +54,24 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
     }
+
+    public User findByUserEmail(String userEmail) {
+
+        return userRepository.findByEmail(userEmail);
+    }
+
+
+    public User findByUsername(String userName) {
+        return userRepository.findByUsername(userName);
+    }
+
+    public User findByUsernameOrEmail(String username,String email) {
+        return userRepository.findByUsernameOrEmail(username,email);
+    }
+
+    public String findByUsernameAll(String userName) {
+        return userRepository.findByUsernameAll(userName);
+    }
+
+
 }
