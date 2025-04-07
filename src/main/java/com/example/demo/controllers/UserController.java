@@ -1,10 +1,13 @@
 package com.example.demo.controllers;
 
+import com.example.demo.Person;
+import com.example.demo.model.Book;
 import lombok.AllArgsConstructor;
 import com.example.demo.model.User;
 import com.example.demo.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -87,4 +90,11 @@ public class UserController {
         userService.deleteUser(userId);
         return new ResponseEntity<>("User successfully deleted!", HttpStatus.OK);
     }
+
+    @GetMapping(path="/person")
+    public Person getPerson() {
+        Person person = new Person("Bharath",39);
+        return person;
+    }
+
 }

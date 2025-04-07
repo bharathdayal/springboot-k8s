@@ -22,12 +22,12 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@SpringBootApplication(exclude ={ SecurityAutoConfiguration.class,  ManagementWebSecurityAutoConfiguration.class })
+@SpringBootApplication
 @EnableCaching
 public class DemoApplication {
 
     //@SpringBootApplication(exclude= {SecurityAutoConfiguration.class,DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
-
+    //@SpringBootApplication(exclude ={ SecurityAutoConfiguration.class,  ManagementWebSecurityAutoConfiguration.class })
 	public static void main(String[] args) throws ParseException, InterruptedException {
 		System.out.println("DEMO APP STARTED");
 
@@ -135,7 +135,7 @@ public class DemoApplication {
 		List<String> streamlist2=arraylist.stream().filter(name->name.contains("Test 1")).collect(Collectors.toUnmodifiableList());
 		System.out.println(streamlist2);
 
-		Person person = new Person();
+		/*Person person = new Person();
 		person.setPersonname("PersonName");
 		person.setPersonage(40);
 
@@ -143,7 +143,7 @@ public class DemoApplication {
 		System.out.println("Age: " + person.getPersonage());
 
 		// Trying to set an invalid age
-		person.setPersonage(-5);
+		person.setPersonage(-5);*/
 
 		String dateString = "2025-03-15 17:30:00";
 		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -209,7 +209,7 @@ public class DemoApplication {
 
 		//Thread
 
-		MyThread thread1=new MyThread();
+		/*MyThread thread1=new MyThread();
 		MyThread thread2=new MyThread();
 
 		//thread1.start();
@@ -232,19 +232,41 @@ public class DemoApplication {
 			//executorService.execute(runnable);
 		}
 		executorService.shutdown();
-
+           */
 
 		//Concurrent Hash Map
 
-		ConcurrentHashMap<Integer,String> concurrent = new ConcurrentHashMap<Integer,String>();
-        concurrent.put(1,"one");
-		concurrent.put(2,"two");
+		ConcurrentHashMap<Integer,String> concurrentMap = new ConcurrentHashMap<Integer,String>();
+		concurrentMap.put(1,"one");
+		concurrentMap.put(2,"two");
 
-		new Thread(()-> { System.out.println("Thread 1:Read key 1"+concurrent.get(1));}).start();
+		new Thread(()->  { System.out.println("Thread 2 read"+concurrentMap.get(2));});
+		new Thread(()-> { concurrentMap.put(3,"three");System.out.println("Thread 3 write");});
 
-		new Thread(()->{ concurrent.put(3,"three");   System.out.println("Thread 2:Inserted key 3");}).start();
+
+		int dayOfWeek = 2;
+		String switchWeek = switch(dayOfWeek) {
+		   case 1,2,3,4,5 -> {
+			   System.out.println("Working day");
+			   yield("Workingday");
+		   }
+		   case 6,7 -> {
+			   System.out.println("Week day");
+			   yield("Weekday");
+		   }
+			default -> throw new IllegalArgumentException("Day of week "+dayOfWeek);
+		};
 
 
+        List<List<String>> flatStreamArr = Arrays.asList(
+				Arrays.asList("FLAT ONE"),
+				Arrays.asList("FLAT TWO"),
+				Arrays.asList("FLAT THREE")
+		);
+
+
+		List<String> flatStreamMap = flatStreamArr.stream().flatMap(List::stream).toList();
+        System.out.println(flatStreamMap);
 
 
 
