@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.components.CreditCard;
+import com.example.demo.components.Paypal;
 import com.example.demo.interfaces.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
@@ -22,7 +24,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@SpringBootApplication
+@SpringBootApplication(exclude ={ SecurityAutoConfiguration.class,  ManagementWebSecurityAutoConfiguration.class })
 @EnableCaching
 public class DemoApplication {
 
@@ -37,7 +39,6 @@ public class DemoApplication {
 
 		SetInterface setInterface = new SetInterface();
 
-		Department department = new Department();
 
 		SpringApplication.run(DemoApplication.class, args);
 
@@ -56,7 +57,7 @@ public class DemoApplication {
 		//System.out.println("Lambda===>" +listInterface.lambda());
 		//System.out.println("Stream Filter===>" +listInterface.lambda());
 
-		System.out.println("Dept Filter===>" +department.departmentFilter());
+
 
 		StringFunctionalInterface stringUpper = input -> {
 			if (input == null || input.isEmpty()) {
@@ -268,8 +269,11 @@ public class DemoApplication {
 		List<String> flatStreamMap = flatStreamArr.stream().flatMap(List::stream).toList();
         System.out.println(flatStreamMap);
 
+		CreditCard creditCard = new CreditCard();
+		creditCard.paymentMethod("Credit Card");
 
-
+		Paypal paypal = new Paypal();
+		paypal.paymentMethod("paypal Card");
 
 	}
 

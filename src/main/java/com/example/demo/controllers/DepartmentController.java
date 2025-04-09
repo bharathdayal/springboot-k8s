@@ -1,8 +1,11 @@
-package com.example.springboot_latest.controller;
+package com.example.demo.controllers;
 
-import com.example.springboot_latest.model.Department;
-import com.example.springboot_latest.service.DepartmentService;
+import com.example.demo.model.Department;
+import com.example.demo.services.DepartmentService;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -10,10 +13,15 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/dept")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class DepartmentController {
 
+
     private DepartmentService departmentService;
+
+    public DepartmentController(DepartmentService departmentService) {
+        this.departmentService = departmentService;
+    }
 
     // build create Employee REST API
     @PostMapping

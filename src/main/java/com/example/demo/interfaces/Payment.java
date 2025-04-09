@@ -1,5 +1,12 @@
 package com.example.demo.interfaces;
 
+import org.springframework.stereotype.Component;
+
+
 public interface Payment {
-    String mode();
+
+
+    String paymentMethod(String mode);
+
+
 }

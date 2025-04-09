@@ -1,5 +1,4 @@
-package com.example.springboot_latest.model;
-
+package com.example.demo.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

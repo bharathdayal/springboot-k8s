@@ -11,11 +11,9 @@ public abstract class PaymentService {
 
     private final Payment payment;
 
-    public PaymentService(@Qualifier("gpay") Payment payment) {
+    public PaymentService( Payment payment) {
         this.payment=payment;
     }
 
-    public String getPaymentMode() {
-        return this.payment.mode();
-    }
+
 }

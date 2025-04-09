@@ -1,6 +1,6 @@
-package com.example.springboot_latest.repository;
+package com.example.demo.repositories;
 
-import com.example.springboot_latest.model.Employee;
+import com.example.demo.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

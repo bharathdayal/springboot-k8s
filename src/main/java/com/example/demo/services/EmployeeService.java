@@ -1,6 +1,6 @@
-package com.example.springboot_latest.service;
+package com.example.demo.services;
 
-import com.example.springboot_latest.model.Employee;
+import com.example.demo.model.Employee;
 
 import java.util.List;
 

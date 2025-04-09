@@ -1,9 +1,9 @@
-package com.example.springboot_latest.controller;
+package com.example.demo.controllers;
 
-import com.example.springboot_latest.model.Department;
-import com.example.springboot_latest.model.Employee;
-import com.example.springboot_latest.repository.DepartmentRepository;
-import com.example.springboot_latest.service.EmployeeService;
+import com.example.demo.model.Department;
+import com.example.demo.model.Employee;
+import com.example.demo.repositories.DepartmentRepository;
+import com.example.demo.services.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

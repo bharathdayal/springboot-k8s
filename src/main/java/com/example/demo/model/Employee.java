@@ -1,5 +1,6 @@
-package com.example.springboot_latest.model;
+package com.example.demo.model;
 
+import com.example.demo.model.Department;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

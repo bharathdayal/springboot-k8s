@@ -1,8 +1,8 @@
-package com.example.springboot_latest.service;
+package com.example.demo.services;
 
-import com.example.springboot_latest.model.Department;
-import com.example.springboot_latest.model.Employee;
-import com.example.springboot_latest.repository.EmployeeRepository;
+import com.example.demo.model.Department;
+import com.example.demo.model.Employee;
+import com.example.demo.repositories.EmployeeRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
