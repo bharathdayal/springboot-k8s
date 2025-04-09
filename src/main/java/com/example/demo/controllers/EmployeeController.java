@@ -26,7 +26,7 @@ public class EmployeeController {
     // build create Employee REST API
     @PostMapping
     public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee, @RequestParam Long departmentId){
-        System.out.println("EMPLOYEE NAME===>"+employee);
+
         Employee saveEmployee = employeeService.createEmployee(employee,departmentId);
         return new ResponseEntity<>(saveEmployee, HttpStatus.CREATED);
     }
@@ -36,6 +36,26 @@ public class EmployeeController {
     public ResponseEntity<List<Employee>> findByDepartmentName(@RequestParam String departmentName) {
         List<Employee> emp= employeeService.findByDepartmentDeptName(departmentName);
         return new ResponseEntity<>(emp,HttpStatus.OK);
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<Employee> updateEmp(@PathVariable ("id") Long empId,
+                                                @RequestBody Employee employee) {
+        employee.setId(empId);
+        Employee existingEmp = employeeService.updateEmployee(employee);
+        return new ResponseEntity<>(existingEmp,HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Employee>> getAllEmp() {
+        List<Employee> emp = employeeService.getAllEmployee();
+        return new ResponseEntity<>(emp, HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteEmp(@PathVariable("id") Long empId) {
+        employeeService.deleteEmployee(empId);
+        return new ResponseEntity<>("Employee successfully deleted!", HttpStatus.OK);
     }
 
 }

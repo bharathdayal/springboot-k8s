@@ -26,6 +26,8 @@ public class Employee {
     @Column(nullable = false)
     private String lastName;
 
+    private Double salary;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="department_id")
     @JsonIgnore

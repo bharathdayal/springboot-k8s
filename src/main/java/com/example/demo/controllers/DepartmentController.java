@@ -11,17 +11,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/dept")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class DepartmentController {
 
 
     private DepartmentService departmentService;
 
-    public DepartmentController(DepartmentService departmentService) {
-        this.departmentService = departmentService;
-    }
 
     // build create Employee REST API
     @PostMapping
@@ -29,5 +28,27 @@ public class DepartmentController {
         Department department1 = departmentService.createDepartment(department);
 
         return new ResponseEntity<>(department1, HttpStatus.CREATED);
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<Department> updateDept(@PathVariable ("id") Long deptId,
+                                        @RequestBody Department department) {
+
+        department.setId(deptId);
+        Department updateDept = departmentService.updateDepartment(department);
+        return new ResponseEntity<>(updateDept,HttpStatus.OK);
+
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Department>> getAllDept(){
+        List<Department> dept = departmentService.getAllDepartment();
+        return new ResponseEntity<>(dept, HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteDept(@PathVariable("id") Long deptInd) {
+         departmentService.deleteDepartment(deptInd);
+        return new ResponseEntity<>("Department successfully deleted!", HttpStatus.OK);
     }
 }

@@ -15,7 +15,6 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 
-
 public class EmployeeServiceImpl implements EmployeeService {
 
 
@@ -41,5 +40,39 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> findByDepartmentDeptName(String departmentName) {
         return employeeRepository.findByDepartmentDeptName(departmentName);
+    }
+
+    @Override
+    public Employee updateEmployee(Employee employee) {
+        Employee existingEmp = employeeRepository.findById(employee.getId()).orElseThrow(()->new RuntimeException("Employee not found"));
+        if (employee.getFirstName() != null) {
+            existingEmp.setFirstName(employee.getFirstName());
+        } else {
+            existingEmp.setFirstName(existingEmp.getFirstName());
+        }
+
+        if ((employee.getLastName()!= null)) {
+            existingEmp.setLastName(employee.getLastName());
+        } else {
+            existingEmp.setLastName(existingEmp.getLastName());
+        }
+
+        if ((employee.getSalary()!= 0)) {
+            existingEmp.setSalary(employee.getSalary());
+        } else {
+            existingEmp.setSalary(existingEmp.getSalary());
+        }
+
+        return employeeRepository.save(existingEmp);
+    }
+
+    @Override
+    public List<Employee> getAllEmployee(){
+        return employeeRepository.findAll();
+    }
+
+    @Override
+    public void deleteEmployee(Long empId) {
+        employeeRepository.deleteById(empId);
     }
 }
