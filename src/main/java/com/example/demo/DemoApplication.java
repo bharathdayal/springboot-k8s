@@ -275,6 +275,49 @@ public class DemoApplication {
 		Paypal paypal = new Paypal();
 		paypal.paymentMethod("paypal Card");
 
+		//String Functions
+		StringFunctions stringFunctions = new StringFunctions();
+		stringFunctions.countString("aaabbbbcccdddeeef");
+
+        stringFunctions.reverseString("String reverse using string builder");
+		stringFunctions.reverseStringloop("String reverse using string builder");
+
+		StringInterface.nonRepeatedString("abcdefb");
+
+		StringInterface.repeatedString("abcc");
+
+		Map<String,String> map = Map.of(
+				"%USER%","admin",
+				"%HOME%","/admin/home");
+
+		String replaceInput = "I am %USER% My home is %HOME%";
+		stringFunctions.replaceString(replaceInput,map);
+
+	    StreamFunctions streamFunctions = new StreamFunctions();
+		List<String> streamArr = Arrays.asList("apple", "banana", "cherry", "apple", "banana", "date");
+
+
+		InterfaceDemo interfaceDemo=new InterfaceDemo();
+		//Abstract Method
+		interfaceDemo.myAbstractA();
+		interfaceDemo.myAbstractB();
+
+		interfaceDemo.myAbstractString("Hello Abstact !");
+		interfaceDemo.myAbstractParam("Hello Abstract !");
+		interfaceDemo.myAbstractParam(12345);
+
+		//Default Method
+		interfaceDemo.myDefaultA();
+		interfaceDemo.myDefaultB();
+		//Default Method - Resolve conflicts Diamond problem when calling same signature from Multiple Interfaces
+		interfaceDemo.myDefaultString("Hello Default !");
+
+		// Static method call from interface and no need to override in implementation class
+		InterfaceDemoA.myStaticA();
+		InterfaceDemoB.myStaticB();
+		// Static method -  No conflicts Diamond problem when calling same signature from Multiple Interfaces
+		InterfaceDemoA.myStaticString("Hello Static !");
+		InterfaceDemoB.myStaticString("Hello Static !");
 	}
 
 }
