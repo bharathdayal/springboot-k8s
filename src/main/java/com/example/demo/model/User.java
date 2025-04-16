@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -33,4 +35,10 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+
+    @ElementCollection
+    @CollectionTable(name="user_hobbies",joinColumns = @JoinColumn(name="users_id"))
+    @Column(name="hobby")
+    private List<String> hobbies;
 }
